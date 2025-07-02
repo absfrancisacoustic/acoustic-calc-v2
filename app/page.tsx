@@ -1,34 +1,35 @@
-'use client'
+// Acoustic Connect ROI Calculator: John Pye & Sons
+'use client';
 
-import { useState } from 'react'
-import { Input } from '@/components/ui/input'
-import { Slider } from '@/components/ui/slider'
-import { Card, CardContent } from '@/components/ui/card'
+import { useState } from 'react';
+import { Slider } from '@/components/ui/slider';
+import { Input } from '@/components/ui/input';
+import { Card, CardContent } from '@/components/ui/card';
 
-export default function Home() {
-  const [traffic, setTraffic] = useState(10000)
-  const [conversionRate, setConversionRate] = useState(2)
-  const [averageOrderValue, setAOV] = useState(50)
-  const [upliftPercent, setUpliftPercent] = useState(10)
+export default function ROICalculator() {
+  const [traffic, setTraffic] = useState(758800);
+  const [conversionRate, setConversionRate] = useState(18.14); // base CVR of engaged traffic
+  const [uplift, setUplift] = useState(10); // default uplift %
+  const [aov, setAOV] = useState(34.15); // average order value
 
-  const baseRevenue = (traffic * (conversionRate / 100) * averageOrderValue)
-  const upliftedRevenue = baseRevenue * (1 + upliftPercent / 100)
-  const additionalRevenue = upliftedRevenue - baseRevenue
+  const engagedTraffic = Math.round(traffic * 0.5958); // 1 - bounce rate 40.42%
+  const baseConversions = Math.round(engagedTraffic * (conversionRate / 100));
+  const baseRevenue = Math.round(baseConversions * aov);
 
-  const annualBaseRevenue = baseRevenue * 12
-  const annualUpliftedRevenue = upliftedRevenue * 12
-  const annualAdditionalRevenue = additionalRevenue * 12
+  const upliftedConversions = Math.round(baseConversions * (uplift / 100));
+  const upliftedRevenue = Math.round(upliftedConversions * aov);
+  const totalRevenue = baseRevenue + upliftedRevenue;
+  const annualUplift = upliftedRevenue * 12;
+  const annualTotalRevenue = totalRevenue * 12;
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-center">
-        Acoustic Connect ROI: John Pye & Sons
-      </h1>
+    <div className="max-w-3xl mx-auto px-4 py-8">
+      <h1 className="text-2xl font-bold mb-6 text-center">Acoustic Connect ROI: John Pye & Sons</h1>
 
-      <Card>
-        <CardContent className="space-y-4 pt-6">
+      <Card className="mb-6">
+        <CardContent className="grid gap-4 pt-6">
           <div>
-            <label>Monthly Website Traffic</label>
+            <label className="font-medium">Monthly Website Visits</label>
             <Input
               type="number"
               value={traffic}
@@ -37,54 +38,56 @@ export default function Home() {
           </div>
 
           <div>
-            <label>Conversion Rate (%)</label>
+            <label className="font-medium">Base Conversion Rate (% of engaged traffic)</label>
             <Input
               type="number"
+              step="0.01"
               value={conversionRate}
               onChange={(e) => setConversionRate(Number(e.target.value))}
             />
           </div>
 
           <div>
-            <label>Average Order Value (£)</label>
+            <label className="font-medium">Average Order Value (£)</label>
             <Input
               type="number"
-              value={averageOrderValue}
+              step="0.01"
+              value={aov}
               onChange={(e) => setAOV(Number(e.target.value))}
             />
           </div>
 
           <div>
-            <label>Uplift from Personalisation (%)</label>
+            <label className="font-medium">Conversion Uplift (%)</label>
             <Slider
-              min={0}
+              min={5}
               max={25}
               step={1}
-              value={[upliftPercent]}
-              onValueChange={([val]) => setUpliftPercent(val)}
+              value={[uplift]}
+              onValueChange={(val) => setUplift(val[0])}
             />
-            <p className="text-sm text-muted-foreground">Uplift: {upliftPercent}%</p>
+            <div className="text-sm text-muted-foreground mt-1">Uplift: {uplift}%</div>
           </div>
         </CardContent>
       </Card>
 
-      <Card>
-        <CardContent className="space-y-2 pt-6">
-          <p><strong>Current Revenue:</strong> £{baseRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-          <p><strong>Revenue with Connect (incl. uplift from retargeting & personalisation):</strong> £{upliftedRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-          <p className="text-green-600 font-semibold">Monthly Uplifted Revenue: £{additionalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-          <hr />
-          <p><strong>Annual Current Revenue:</strong> £{annualBaseRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-          <p><strong>Annual Revenue with Connect:</strong> £{annualUpliftedRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-          <p className="text-green-600 font-semibold">Annual Uplifted Revenue: £{annualAdditionalRevenue.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-        </CardContent>
-      </Card>
+      <div className="grid gap-4">
+        <Card>
+          <CardContent className="grid gap-2 pt-4">
+            <div><strong>Engaged Monthly Visitors:</strong> {engagedTraffic.toLocaleString()}</div>
+            <div><strong>Current Monthly Conversions:</strong> {baseConversions.toLocaleString()}</div>
+            <div><strong>Current Monthly Revenue:</strong> £{baseRevenue.toLocaleString()}</div>
+            <div><strong>Additional Monthly Conversions from Uplift:</strong> {upliftedConversions.toLocaleString()}</div>
+            <div><strong>Additional Monthly Revenue:</strong> £{upliftedRevenue.toLocaleString()}</div>
+            <div><strong>12-Month Additional Revenue:</strong> £{annualUplift.toLocaleString()}</div>
+            <div><strong>Projected Total Revenue with Connect (Annual):</strong> £{annualTotalRevenue.toLocaleString()}</div>
+          </CardContent>
+        </Card>
 
-      <div className="flex justify-between items-center mt-6">
-        <img src="/johnpye.png" alt="John Pye Logo" className="w-28" />
-        <img src="/acoustic.png" alt="Acoustic Logo" className="w-28" />
+        <p className="text-sm text-muted-foreground pt-4">
+          Note: This projection blends impact across all buyer types — including registrants who haven’t bid yet, lost bidders, and re-engagement of past winners — all retargeted automatically through email using Acoustic Connect.
+        </p>
       </div>
     </div>
-  )
+  );
 }
-
