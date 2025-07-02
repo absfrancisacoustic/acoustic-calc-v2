@@ -11,16 +11,16 @@ export default function Home() {
   const [averageOrderValue, setAOV] = useState(34.15)
   const [upliftPercent, setUpliftPercent] = useState(5)
 
-  const engagedVisitors = traffic * 0.5953
-  const currentConversions = Math.round(engagedVisitors * (conversionRate / 100))
-  const upliftedConversions = Math.round(currentConversions * (upliftPercent / 100))
+  const engagedTraffic = traffic * 0.595
+  const baseConversions = engagedTraffic * (conversionRate / 100)
+  const baseRevenue = baseConversions * averageOrderValue
+  const upliftedConversions = baseConversions * (1 + upliftPercent / 100)
+  const upliftedRevenue = upliftedConversions * averageOrderValue
+  const additionalRevenue = upliftedRevenue - baseRevenue
 
-  const currentRevenue = currentConversions * averageOrderValue
-  const additionalRevenue = upliftedConversions * averageOrderValue
-
-  const annualCurrentRevenue = currentRevenue * 12
+  const annualBaseRevenue = baseRevenue * 12
+  const annualUpliftedRevenue = upliftedRevenue * 12
   const annualAdditionalRevenue = additionalRevenue * 12
-  const annualProjectedRevenue = annualCurrentRevenue + annualAdditionalRevenue
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-6">
@@ -38,6 +38,7 @@ export default function Home() {
               onChange={(e) => setTraffic(Number(e.target.value))}
             />
           </div>
+
           <div>
             <label>Base Conversion Rate (% of engaged traffic)</label>
             <Input
@@ -46,6 +47,7 @@ export default function Home() {
               onChange={(e) => setConversionRate(Number(e.target.value))}
             />
           </div>
+
           <div>
             <label>Average Order Value (£)</label>
             <Input
@@ -54,30 +56,37 @@ export default function Home() {
               onChange={(e) => setAOV(Number(e.target.value))}
             />
           </div>
+
           <div>
             <label>Conversion Uplift (%)</label>
             <Slider
-              defaultValue={[upliftPercent]}
+              value={[upliftPercent]}
+              onValueChange={(val) => setUpliftPercent(val[0])}
+              min={0}
               max={25}
               step={1}
-              onValueChange={([value]) => setUpliftPercent(value)}
             />
-            <div className="text-sm text-muted-foreground">Uplift: {upliftPercent}%</div>
+            <p className="text-sm text-muted-foreground">Uplift: {upliftPercent}%</p>
           </div>
         </CardContent>
       </Card>
 
       <Card>
-        <CardContent className="space-y-2 pt-6">
-          <p><strong>Engaged Monthly Visitors:</strong> {engagedVisitors.toLocaleString()}</p>
-          <p><strong>Current Monthly Conversions:</strong> {currentConversions.toLocaleString()}</p>
-          <p><strong>Current Monthly Revenue:</strong> £{currentRevenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
-          <p className="text-green-600 font-semibold">Additional Monthly Revenue: £{additionalRevenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
-          <p><strong>Annual Current Revenue:</strong> £{annualCurrentRevenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
-          <p><strong>Annual Revenue with Connect:</strong> £{annualProjectedRevenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
-          <p className="text-green-600 font-semibold">Annual Uplifted Revenue: £{annualAdditionalRevenue.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</p>
+        <CardContent className="space-y-2 pt-6 text-sm">
+          <p><strong>Engaged Monthly Visitors:</strong> {engagedTraffic.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+          <p><strong>Current Monthly Conversions:</strong> {baseConversions.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
+          <p><strong>Current Monthly Revenue:</strong> £{baseRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+          <p className="text-green-600 font-semibold">Additional Monthly Revenue: £{additionalRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+          <p><strong>Annual Current Revenue:</strong> £{annualBaseRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+          <p><strong>Annual Revenue with Connect:</strong> £{annualUpliftedRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+          <p className="text-green-600 font-semibold">Annual Uplifted Revenue: £{annualAdditionalRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
         </CardContent>
       </Card>
+
+      <div className="flex justify-between px-6 pt-4">
+        <img src="/johnpye.png" alt="John Pye Logo" className="h-12" />
+        <img src="/acoustic.png" alt="Acoustic Logo" className="h-10" />
+      </div>
     </div>
   )
 }
