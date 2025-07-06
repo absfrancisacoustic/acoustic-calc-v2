@@ -6,21 +6,22 @@ import { Slider } from '@/components/ui/slider'
 import { Card, CardContent } from '@/components/ui/card'
 
 export default function Home() {
-  const [traffic, setTraffic] = useState(758800)
-  const [conversionRate, setConversionRate] = useState(18.14)
-  const [averageOrderValue, setAOV] = useState(34.15)
+  const [lots, setLots] = useState(400000)
+  const [bidsPerLot, setBidsPerLot] = useState(10.88)
+  const [avgLotValue, setAvgLotValue] = useState(34.15)
+  const [avgInvoiceValue, setAvgInvoiceValue] = useState(175)
   const [upliftPercent, setUpliftPercent] = useState(5)
 
-  const engagedTraffic = traffic * 0.595
-  const baseConversions = engagedTraffic * (conversionRate / 100)
-  const baseRevenue = baseConversions * averageOrderValue
-  const upliftedConversions = baseConversions * (1 + upliftPercent / 100)
-  const upliftedRevenue = upliftedConversions * averageOrderValue
-  const additionalRevenue = upliftedRevenue - baseRevenue
+  const upliftMultiplier = 1 + upliftPercent / 100
 
-  const annualBaseRevenue = baseRevenue * 12
-  const annualUpliftedRevenue = upliftedRevenue * 12
-  const annualAdditionalRevenue = additionalRevenue * 12
+  const upliftedLotValue = avgLotValue * upliftMultiplier
+  const upliftedInvoiceValue = avgInvoiceValue * upliftMultiplier
+
+  const monthlyLotRevenue = lots * upliftedLotValue
+  const monthlyInvoiceRevenue = lots * upliftedInvoiceValue
+
+  const annualLotRevenue = monthlyLotRevenue * 4.33 * 12 / 4.33
+  const annualInvoiceRevenue = monthlyInvoiceRevenue * 4.33 * 12 / 4.33
 
   return (
     <div className="max-w-3xl mx-auto p-6 space-y-6">
@@ -31,34 +32,43 @@ export default function Home() {
       <Card>
         <CardContent className="space-y-4 pt-6">
           <div>
-            <label>Monthly Website Visits</label>
+            <label>Total Weekly Lots</label>
             <Input
               type="number"
-              value={traffic}
-              onChange={(e) => setTraffic(Number(e.target.value))}
+              value={lots}
+              onChange={(e) => setLots(Number(e.target.value))}
             />
           </div>
 
           <div>
-            <label>Base Conversion Rate (% of engaged traffic)</label>
+            <label>Avg Bids Per Lot</label>
             <Input
               type="number"
-              value={conversionRate}
-              onChange={(e) => setConversionRate(Number(e.target.value))}
+              value={bidsPerLot}
+              onChange={(e) => setBidsPerLot(Number(e.target.value))}
             />
           </div>
 
           <div>
-            <label>Average Order Value (£)</label>
+            <label>Average Lot Value (£)</label>
             <Input
               type="number"
-              value={averageOrderValue}
-              onChange={(e) => setAOV(Number(e.target.value))}
+              value={avgLotValue}
+              onChange={(e) => setAvgLotValue(Number(e.target.value))}
             />
           </div>
 
           <div>
-            <label>Conversion Uplift (%)</label>
+            <label>Average Invoice Value (£)</label>
+            <Input
+              type="number"
+              value={avgInvoiceValue}
+              onChange={(e) => setAvgInvoiceValue(Number(e.target.value))}
+            />
+          </div>
+
+          <div>
+            <label>Uplift from Personalisation (%)</label>
             <Slider
               value={[upliftPercent]}
               onValueChange={(val) => setUpliftPercent(val[0])}
@@ -73,13 +83,10 @@ export default function Home() {
 
       <Card>
         <CardContent className="space-y-2 pt-6 text-sm">
-          <p><strong>Engaged Monthly Visitors:</strong> {engagedTraffic.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
-          <p><strong>Current Monthly Conversions:</strong> {baseConversions.toLocaleString(undefined, { maximumFractionDigits: 0 })}</p>
-          <p><strong>Current Monthly Revenue:</strong> £{baseRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
-          <p className="text-green-600 font-semibold">Additional Monthly Revenue: £{additionalRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
-          <p><strong>Annual Current Revenue:</strong> £{annualBaseRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
-          <p><strong>Annual Revenue with Connect:</strong> £{annualUpliftedRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
-          <p className="text-green-600 font-semibold">Annual Uplifted Revenue: £{annualAdditionalRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+          <p><strong>Monthly Revenue (Avg. Lot Value):</strong> £{monthlyLotRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+          <p><strong>Monthly Revenue (Avg. Invoice Value):</strong> £{monthlyInvoiceRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+          <p className="text-green-600 font-semibold">Annual Revenue (Avg. Lot Value): £{annualLotRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
+          <p className="text-green-600 font-semibold">Annual Revenue (Avg. Invoice Value): £{annualInvoiceRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
         </CardContent>
       </Card>
 
