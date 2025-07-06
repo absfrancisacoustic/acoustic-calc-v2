@@ -1,3 +1,5 @@
+'use client'
+
 import { useState } from "react";
 
 export default function AuctionRevenueCalculatorB() {
@@ -40,8 +42,8 @@ export default function AuctionRevenueCalculatorB() {
         </label>
         <input
           type="range"
-          min="1"
-          max="25"
+          min={1}
+          max={25}
           value={upliftPercent}
           onChange={(e) => setUpliftPercent(Number(e.target.value))}
           className="w-full mt-2"
@@ -51,20 +53,19 @@ export default function AuctionRevenueCalculatorB() {
       <div className="grid grid-cols-2 gap-4 mt-6">
         <div className="p-4 border rounded-lg">
           <h3 className="text-sm font-medium text-gray-500">Avg Bids per Lot</h3>
-          <p className="text-lg font-semibold">{avgBidsPerLot} → <span className="text-green-600">{upliftedBidsPerLot}</span></p>
+          <p className="text-lg font-semibold">{avgBidsPerLot} → <span className="text-green-600 font-semibold">{upliftedBidsPerLot}</span></p>
         </div>
         <div className="p-4 border rounded-lg">
           <h3 className="text-sm font-medium text-gray-500">Avg Lot Value</h3>
-          <p className="text-lg font-semibold">{formatCurrency(avgLotValue)} → <span className="text-green-600">{formatCurrency(upliftedLotValue)}</span></p>
+          <p className="text-lg font-semibold">{formatCurrency(avgLotValue)} → <span className="text-green-600 font-semibold">{formatCurrency(upliftedLotValue)}</span></p>
         </div>
-
         <div className="p-4 border rounded-lg">
           <h3 className="text-sm font-medium text-gray-500">Monthly Revenue</h3>
-          <p className="text-lg font-semibold">{formatCurrency(monthlyRevenueBefore)} → <span className="text-green-600">{formatCurrency(monthlyRevenueAfter)}</span></p>
+          <p className="text-lg font-semibold">{formatCurrency(monthlyRevenueBefore)} → <span className="text-green-600 font-semibold">{formatCurrency(monthlyRevenueAfter)}</span></p>
         </div>
         <div className="p-4 border rounded-lg">
           <h3 className="text-sm font-medium text-gray-500">Annual Revenue</h3>
-          <p className="text-lg font-semibold">{formatCurrency(annualRevenueBefore)} → <span className="text-green-600">{formatCurrency(annualRevenueAfter)}</span></p>
+          <p className="text-lg font-semibold">{formatCurrency(annualRevenueBefore)} → <span className="text-green-600 font-semibold">{formatCurrency(annualRevenueAfter)}</span></p>
         </div>
       </div>
     </div>
