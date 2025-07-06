@@ -1,99 +1,72 @@
-'use client'
+import { useState } from "react";
 
-import { useState } from 'react'
-import { Input } from '@/components/ui/input'
-import { Slider } from '@/components/ui/slider'
-import { Card, CardContent } from '@/components/ui/card'
+export default function AuctionRevenueCalculatorB() {
+  const [upliftPercent, setUpliftPercent] = useState(5);
 
-export default function Home() {
-  const [lots, setLots] = useState(400000)
-  const [bidsPerLot, setBidsPerLot] = useState(10.88)
-  const [avgLotValue, setAvgLotValue] = useState(34.15)
-  const [avgInvoiceValue, setAvgInvoiceValue] = useState(175)
-  const [upliftPercent, setUpliftPercent] = useState(5)
+  const weeklyLots = 40000;
+  const monthlyLots = weeklyLots * 4.3; // 172,000
+  const avgLotValue = 34.15;
+  const avgBidsPerLot = 10.88;
 
-  const upliftMultiplier = 1 + upliftPercent / 100
+  const upliftMultiplier = 1 + upliftPercent / 100;
+  const upliftedBidsPerLot = (avgBidsPerLot * upliftMultiplier).toFixed(2);
+  const upliftedLotValue = avgLotValue * upliftMultiplier;
 
-  const upliftedLotValue = avgLotValue * upliftMultiplier
-  const upliftedInvoiceValue = avgInvoiceValue * upliftMultiplier
+  const monthlyRevenueBefore = monthlyLots * avgLotValue;
+  const monthlyRevenueAfter = monthlyLots * upliftedLotValue;
+  const annualRevenueBefore = monthlyRevenueBefore * 12;
+  const annualRevenueAfter = monthlyRevenueAfter * 12;
 
-  const monthlyLotRevenue = lots * upliftedLotValue
-  const monthlyInvoiceRevenue = lots * upliftedInvoiceValue
-
-  const annualLotRevenue = monthlyLotRevenue * 4.33 * 12 / 4.33
-  const annualInvoiceRevenue = monthlyInvoiceRevenue * 4.33 * 12 / 4.33
+  const formatCurrency = (value) =>
+    new Intl.NumberFormat("en-UK", {
+      style: "currency",
+      currency: "GBP",
+      maximumFractionDigits: 0,
+    }).format(value);
 
   return (
-    <div className="max-w-3xl mx-auto p-6 space-y-6">
-      <h1 className="text-2xl font-bold text-center">
-        Acoustic Connect ROI: John Pye & Sons
-      </h1>
+    <div className="max-w-3xl mx-auto p-6 bg-white rounded-2xl shadow-md">
+      <div className="flex justify-between mb-6">
+        <img src="/johnpye-logo.png" alt="John Pye Logo" className="h-12" />
+        <h2 className="text-xl font-semibold text-center">
+          Acoustic Connect ROI: John Pye & Sons
+        </h2>
+        <img src="/acoustic-logo.png" alt="Acoustic Logo" className="h-12" />
+      </div>
 
-      <Card>
-        <CardContent className="space-y-4 pt-6">
-          <div>
-            <label>Total Weekly Lots</label>
-            <Input
-              type="number"
-              value={lots}
-              onChange={(e) => setLots(Number(e.target.value))}
-            />
-          </div>
+      <div className="mb-4">
+        <label className="block text-sm font-medium text-gray-700">
+          Uplift in Average Bids per Lot (%): {upliftPercent}%
+        </label>
+        <input
+          type="range"
+          min="1"
+          max="25"
+          value={upliftPercent}
+          onChange={(e) => setUpliftPercent(Number(e.target.value))}
+          className="w-full mt-2"
+        />
+      </div>
 
-          <div>
-            <label>Avg Bids Per Lot</label>
-            <Input
-              type="number"
-              value={bidsPerLot}
-              onChange={(e) => setBidsPerLot(Number(e.target.value))}
-            />
-          </div>
+      <div className="grid grid-cols-2 gap-4 mt-6">
+        <div className="p-4 border rounded-lg">
+          <h3 className="text-sm font-medium text-gray-500">Avg Bids per Lot</h3>
+          <p className="text-lg font-semibold">{avgBidsPerLot} → <span className="text-green-600">{upliftedBidsPerLot}</span></p>
+        </div>
+        <div className="p-4 border rounded-lg">
+          <h3 className="text-sm font-medium text-gray-500">Avg Lot Value</h3>
+          <p className="text-lg font-semibold">{formatCurrency(avgLotValue)} → <span className="text-green-600">{formatCurrency(upliftedLotValue)}</span></p>
+        </div>
 
-          <div>
-            <label>Average Lot Value (£)</label>
-            <Input
-              type="number"
-              value={avgLotValue}
-              onChange={(e) => setAvgLotValue(Number(e.target.value))}
-            />
-          </div>
-
-          <div>
-            <label>Average Invoice Value (£)</label>
-            <Input
-              type="number"
-              value={avgInvoiceValue}
-              onChange={(e) => setAvgInvoiceValue(Number(e.target.value))}
-            />
-          </div>
-
-          <div>
-            <label>Uplift from Personalisation (%)</label>
-            <Slider
-              value={[upliftPercent]}
-              onValueChange={(val) => setUpliftPercent(val[0])}
-              min={0}
-              max={25}
-              step={1}
-            />
-            <p className="text-sm text-muted-foreground">Uplift: {upliftPercent}%</p>
-          </div>
-        </CardContent>
-      </Card>
-
-      <Card>
-        <CardContent className="space-y-2 pt-6 text-sm">
-          <p><strong>Monthly Revenue (Avg. Lot Value):</strong> £{monthlyLotRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
-          <p><strong>Monthly Revenue (Avg. Invoice Value):</strong> £{monthlyInvoiceRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
-          <p className="text-green-600 font-semibold">Annual Revenue (Avg. Lot Value): £{annualLotRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
-          <p className="text-green-600 font-semibold">Annual Revenue (Avg. Invoice Value): £{annualInvoiceRevenue.toLocaleString(undefined, { maximumFractionDigits: 2 })}</p>
-        </CardContent>
-      </Card>
-
-      <div className="flex justify-between px-6 pt-4">
-        <img src="/johnpye.png" alt="John Pye Logo" className="h-12" />
-        <img src="/acoustic.png" alt="Acoustic Logo" className="h-10" />
+        <div className="p-4 border rounded-lg">
+          <h3 className="text-sm font-medium text-gray-500">Monthly Revenue</h3>
+          <p className="text-lg font-semibold">{formatCurrency(monthlyRevenueBefore)} → <span className="text-green-600">{formatCurrency(monthlyRevenueAfter)}</span></p>
+        </div>
+        <div className="p-4 border rounded-lg">
+          <h3 className="text-sm font-medium text-gray-500">Annual Revenue</h3>
+          <p className="text-lg font-semibold">{formatCurrency(annualRevenueBefore)} → <span className="text-green-600">{formatCurrency(annualRevenueAfter)}</span></p>
+        </div>
       </div>
     </div>
-  )
+  );
 }
