@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function AuctionRevenueCalculatorB() {
+export default function AuctionRevenueCalculatorWithSources() {
   const [upliftPercent, setUpLiftPercent] = useState(5);
 
   const weeklyLots = 40000;
@@ -22,7 +22,7 @@ export default function AuctionRevenueCalculatorB() {
   const upliftMonthly = monthlyRevenueAfter - monthlyRevenueBefore;
   const upliftAnnual = annualRevenueAfter - annualRevenueBefore;
 
-  const formatCurrency = (value: number | string) =>
+  const formatCurrency = (value) =>
     new Intl.NumberFormat("en-UK", {
       style: "currency",
       currency: "GBP",
@@ -30,7 +30,7 @@ export default function AuctionRevenueCalculatorB() {
       maximumFractionDigits: 0,
     }).format(Number(value));
 
-  const formatCurrency2dp = (value: number | string) =>
+  const formatCurrency2dp = (value) =>
     new Intl.NumberFormat("en-UK", {
       style: "currency",
       currency: "GBP",
@@ -97,6 +97,40 @@ export default function AuctionRevenueCalculatorB() {
           <h3 className="text-lg font-semibold text-gray-700">Annual Revenue Uplift</h3>
           <p className="text-green-600 font-semibold text-xl">{formatCurrency(upliftAnnual)}</p>
         </div>
+      </div>
+
+      <div className="mt-16">
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Industry Uplift Benchmarks from Personalisation</h3>
+        <table className="min-w-full text-sm text-left border">
+          <thead className="bg-gray-100">
+            <tr>
+              <th className="px-4 py-2 border">Source</th>
+              <th className="px-4 py-2 border">Reported Uplift</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td className="px-4 py-2 border">Instapage</td>
+              <td className="px-4 py-2 border">20% conversion rate increase (2023)</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border">ContactPigeon</td>
+              <td className="px-4 py-2 border">10–20% increase in revenue (2024)</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border">Econsultancy</td>
+              <td className="px-4 py-2 border">93% of companies see revenue growth with personalisation (2023)</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border">McKinsey</td>
+              <td className="px-4 py-2 border">10–15% increase in sales lift (2021)</td>
+            </tr>
+            <tr>
+              <td className="px-4 py-2 border">Forrester</td>
+              <td className="px-4 py-2 border">Up to 33% lift in conversion (Retail, 2022)</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
   );
