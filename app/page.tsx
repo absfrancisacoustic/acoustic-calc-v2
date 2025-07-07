@@ -6,7 +6,7 @@ export default function AuctionRevenueCalculatorB() {
   const [upliftPercent, setUpliftPercent] = useState(5);
 
   const weeklyLots = 40000;
-  const monthlyLots = weeklyLots * 4.3; // 172,000
+  const monthlyLots = weeklyLots * 4.3;
   const avgLotValue = 34.15;
   const avgBidsPerLot = 10.88;
 
@@ -19,7 +19,7 @@ export default function AuctionRevenueCalculatorB() {
   const annualRevenueBefore = monthlyRevenueBefore * 12;
   const annualRevenueAfter = monthlyRevenueAfter * 12;
 
-  const formatCurrency = (value) =>
+  const formatCurrency = (value: number) =>
     new Intl.NumberFormat("en-UK", {
       style: "currency",
       currency: "GBP",
@@ -28,7 +28,7 @@ export default function AuctionRevenueCalculatorB() {
 
   return (
     <div className="max-w-4xl mx-auto p-6 bg-white rounded-2xl shadow-md">
-      <div className="flex justify-between mb-6">
+      <div className="flex justify-between items-center mb-6">
         <img src="/johnpye-logo.png" alt="John Pye Logo" className="h-12" />
         <h2 className="text-xl font-semibold text-center">
           Acoustic Connect ROI: John Pye & Sons
@@ -50,27 +50,37 @@ export default function AuctionRevenueCalculatorB() {
         />
       </div>
 
-      <div className="grid grid-cols-3 gap-6 mt-6">
-        <div className="text-sm font-medium text-gray-700">Metric</div>
-        <div className="text-sm font-medium text-gray-700">Current</div>
-        <div className="text-sm font-medium text-gray-700">Estimated With Connect</div>
+      <div className="grid grid-cols-3 gap-4 text-sm font-medium text-gray-700 border-b pb-2 mb-2">
+        <div>Metric</div>
+        <div>Current</div>
+        <div>Estimated With Connect</div>
+      </div>
 
+      <div className="grid grid-cols-3 gap-4 text-sm py-1 border-b">
         <div>Total Weekly Lots</div>
         <div>40,000</div>
         <div>40,000</div>
+      </div>
 
+      <div className="grid grid-cols-3 gap-4 text-sm py-1 border-b">
         <div>Average Bids Per Lot</div>
         <div>{avgBidsPerLot}</div>
         <div className="text-green-600 font-semibold">{upliftedBidsPerLot}</div>
+      </div>
 
+      <div className="grid grid-cols-3 gap-4 text-sm py-1 border-b">
         <div>Average Lot Value</div>
         <div>{formatCurrency(avgLotValue)}</div>
         <div className="text-green-600 font-semibold">{formatCurrency(upliftedLotValue)}</div>
+      </div>
 
+      <div className="grid grid-cols-3 gap-4 text-sm py-1 border-b">
         <div>Total Monthly Revenue</div>
         <div>{formatCurrency(monthlyRevenueBefore)}</div>
         <div className="text-green-600 font-semibold">{formatCurrency(monthlyRevenueAfter)}</div>
+      </div>
 
+      <div className="grid grid-cols-3 gap-4 text-sm py-1">
         <div>Total Annual Revenue</div>
         <div>{formatCurrency(annualRevenueBefore)}</div>
         <div className="text-green-600 font-semibold">{formatCurrency(annualRevenueAfter)}</div>
