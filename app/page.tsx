@@ -6,7 +6,7 @@ export default function AuctionRevenueCalculatorB() {
   const [upliftPercent, setUpliftPercent] = useState(5);
 
   const weeklyLots = 40000;
-  const monthlyLots = weeklyLots * 4.3;
+  const monthlyLots = weeklyLots * 4.3; // 172,000
   const avgLotValue = 34.15;
   const avgBidsPerLot = 10.88;
 
@@ -26,13 +26,22 @@ export default function AuctionRevenueCalculatorB() {
     new Intl.NumberFormat("en-UK", {
       style: "currency",
       currency: "GBP",
+      minimumFractionDigits: 0,
       maximumFractionDigits: 0,
     }).format(value);
 
+  const formatCurrency2dp = (value) =>
+    new Intl.NumberFormat("en-UK", {
+      style: "currency",
+      currency: "GBP",
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2,
+    }).format(value);
+
   return (
-    <div className="max-w-6xl mx-auto p-10 bg-white rounded-2xl shadow-md">
+    <div className="max-w-7xl mx-auto p-12 bg-white rounded-2xl shadow-md">
       <div className="flex justify-between mb-8 items-center">
-        <img src="/johnpye-logo.png" alt="John Pye Logo" className="h-14" />
+        <img src="/johnpye.png" alt="John Pye Logo" className="h-14" />
         <h2 className="text-2xl font-semibold text-center">
           Acoustic Connect ROI: John Pye & Sons
         </h2>
@@ -40,7 +49,7 @@ export default function AuctionRevenueCalculatorB() {
       </div>
 
       <div className="mb-6">
-        <label className="block text-sm font-medium text-gray-700">
+        <label className="block text-base font-medium text-gray-700">
           Uplift From Personalisation (%): {upliftPercent}%
         </label>
         <input
@@ -53,22 +62,22 @@ export default function AuctionRevenueCalculatorB() {
         />
       </div>
 
-      <div className="grid grid-cols-3 gap-6 mt-8 text-sm">
-        <div className="font-semibold text-gray-800 text-base">Metric</div>
-        <div className="font-semibold text-gray-800 text-base">Current</div>
-        <div className="font-semibold text-gray-800 text-base">Estimated With Connect</div>
+      <div className="grid grid-cols-3 gap-6 mt-8 text-base">
+        <div className="font-semibold text-gray-900 text-lg">Metric</div>
+        <div className="font-semibold text-gray-900 text-lg">Current</div>
+        <div className="font-semibold text-gray-900 text-lg">Estimated With Connect</div>
 
         <div>Total Weekly Lots</div>
-        <div>40,000</div>
-        <div>40,000</div>
+        <div className="font-semibold">40,000</div>
+        <div className="font-semibold">40,000</div>
 
         <div>Average Bids Per Lot</div>
         <div>{avgBidsPerLot}</div>
         <div className="text-green-600 font-semibold">{upliftedBidsPerLot}</div>
 
         <div>Average Lot Value</div>
-        <div>{avgLotValue.toFixed(2)}</div>
-        <div className="text-green-600 font-semibold">{Number(upliftedLotValue).toFixed(2)}</div>
+        <div>{formatCurrency2dp(avgLotValue)}</div>
+        <div className="text-green-600 font-semibold">{formatCurrency2dp(upliftedLotValue)}</div>
 
         <div>Total Monthly Revenue</div>
         <div>{formatCurrency(monthlyRevenueBefore)}</div>
@@ -79,13 +88,13 @@ export default function AuctionRevenueCalculatorB() {
         <div className="text-green-600 font-semibold">{formatCurrency(annualRevenueAfter)}</div>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mt-12 text-center">
+      <div className="grid grid-cols-2 gap-6 mt-20 text-center">
         <div>
-          <h3 className="text-sm font-medium text-gray-500">Monthly Revenue Uplift</h3>
+          <h3 className="text-base font-semibold text-gray-700">Monthly Revenue Uplift</h3>
           <p className="text-green-600 font-semibold text-lg">{formatCurrency(upliftMonthly)}</p>
         </div>
         <div>
-          <h3 className="text-sm font-medium text-gray-500">Annual Revenue Uplift</h3>
+          <h3 className="text-base font-semibold text-gray-700">Annual Revenue Uplift</h3>
           <p className="text-green-600 font-semibold text-lg">{formatCurrency(upliftAnnual)}</p>
         </div>
       </div>
