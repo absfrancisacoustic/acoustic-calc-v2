@@ -43,7 +43,7 @@ export default function AuctionRevenueCalculatorB() {
       <div className="flex justify-between mb-8 items-center">
         <img src="/johnpye-logo.png" alt="John Pye Logo" className="h-14" />
         <h2 className="text-2xl font-semibold text-center">
-          Acoustic Connect ROI: John Pye & Sons
+          Acoustic Connect ROI: John Pye & <span className="text-red-500">Sons</span>
         </h2>
         <img src="/acoustic.png" alt="Acoustic Logo" className="h-12" />
       </div>
@@ -88,18 +88,14 @@ export default function AuctionRevenueCalculatorB() {
         <div className="text-green-600 font-semibold">{formatCurrency(annualRevenueAfter)}</div>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mt-20 text-center">
+      <div className="grid grid-cols-2 gap-6 mt-16 text-center">
         <div>
           <h3 className="text-base font-semibold text-gray-700">Monthly Revenue Uplift</h3>
-          <p className="text-green-600 font-semibold text-lg">
-            {formatCurrency(upliftMonthly)}
-          </p>
+          <p className="text-green-600 font-semibold text-lg">{formatCurrency(upliftMonthly)}</p>
         </div>
         <div>
           <h3 className="text-base font-semibold text-gray-700">Annual Revenue Uplift</h3>
-          <p className="text-green-600 font-semibold text-lg">
-            {formatCurrency(upliftAnnual)}
-          </p>
+          <p className="text-green-600 font-semibold text-lg">{formatCurrency(upliftAnnual)}</p>
         </div>
       </div>
     </div>
