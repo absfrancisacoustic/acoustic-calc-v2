@@ -41,7 +41,7 @@ export default function AuctionRevenueCalculatorB() {
   return (
     <div className="max-w-7xl mx-auto p-12 bg-white rounded-2xl shadow-md">
       <div className="flex justify-between mb-8 items-center">
-        <img src="/johnpye_logo.png" alt="John Pye Logo" className="h-16" />
+        <img src="/johnpye.png" alt="John Pye Logo" className="h-16" />
         <h2 className="text-2xl font-semibold text-center">
           Acoustic Connect ROI: John Pye & Sons
         </h2>
