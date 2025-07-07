@@ -22,7 +22,7 @@ export default function AuctionRevenueCalculatorB() {
   const upliftMonthly = monthlyRevenueAfter - monthlyRevenueBefore;
   const upliftAnnual = annualRevenueAfter - annualRevenueBefore;
 
-  const formatCurrency = (value) =>
+  const formatCurrency = (value: number) =>
     new Intl.NumberFormat("en-UK", {
       style: "currency",
       currency: "GBP",
@@ -30,7 +30,7 @@ export default function AuctionRevenueCalculatorB() {
       maximumFractionDigits: 0,
     }).format(value);
 
-  const formatCurrency2dp = (value) =>
+  const formatCurrency2dp = (value: number) =>
     new Intl.NumberFormat("en-UK", {
       style: "currency",
       currency: "GBP",
@@ -41,11 +41,11 @@ export default function AuctionRevenueCalculatorB() {
   return (
     <div className="max-w-7xl mx-auto p-12 bg-white rounded-2xl shadow-md">
       <div className="flex justify-between mb-8 items-center">
-        <img src="/johnpye-logo.png" alt="John Pye Logo" className="h-14" />
+        <img src="/johnpye-logo.png" alt="John Pye Logo" className="h-16" />
         <h2 className="text-2xl font-semibold text-center">
-          Acoustic Connect ROI: John Pye & <span className="text-red-500">Sons</span>
+          Acoustic Connect ROI: John Pye & Sons
         </h2>
-        <img src="/acoustic.png" alt="Acoustic Logo" className="h-12" />
+        <img src="/acoustic.png" alt="Acoustic Logo" className="h-14" />
       </div>
 
       <div className="mb-6">
@@ -72,30 +72,34 @@ export default function AuctionRevenueCalculatorB() {
         <div className="font-semibold">40,000</div>
 
         <div>Average Bids Per Lot</div>
-        <div>{avgBidsPerLot}</div>
+        <div className="font-semibold">{avgBidsPerLot}</div>
         <div className="text-green-600 font-semibold">{upliftedBidsPerLot}</div>
 
         <div>Average Lot Value</div>
-        <div>{formatCurrency2dp(avgLotValue)}</div>
-        <div className="text-green-600 font-semibold">{formatCurrency2dp(upliftedLotValue)}</div>
+        <div className="font-semibold">{formatCurrency2dp(avgLotValue)}</div>
+        <div className="text-green-600 font-semibold">{formatCurrency2dp(parseFloat(upliftedLotValue))}</div>
 
         <div>Total Monthly Revenue</div>
-        <div>{formatCurrency(monthlyRevenueBefore)}</div>
+        <div className="font-semibold">{formatCurrency(monthlyRevenueBefore)}</div>
         <div className="text-green-600 font-semibold">{formatCurrency(monthlyRevenueAfter)}</div>
 
         <div>Total Annual Revenue</div>
-        <div>{formatCurrency(annualRevenueBefore)}</div>
+        <div className="font-semibold">{formatCurrency(annualRevenueBefore)}</div>
         <div className="text-green-600 font-semibold">{formatCurrency(annualRevenueAfter)}</div>
       </div>
 
       <div className="grid grid-cols-2 gap-6 mt-16 text-center">
         <div>
           <h3 className="text-base font-semibold text-gray-700">Monthly Revenue Uplift</h3>
-          <p className="text-green-600 font-semibold text-lg">{formatCurrency(upliftMonthly)}</p>
+          <p className="text-green-600 font-semibold text-lg">
+            {formatCurrency(upliftMonthly)}
+          </p>
         </div>
         <div>
           <h3 className="text-base font-semibold text-gray-700">Annual Revenue Uplift</h3>
-          <p className="text-green-600 font-semibold text-lg">{formatCurrency(upliftAnnual)}</p>
+          <p className="text-green-600 font-semibold text-lg">
+            {formatCurrency(upliftAnnual)}
+          </p>
         </div>
       </div>
     </div>
