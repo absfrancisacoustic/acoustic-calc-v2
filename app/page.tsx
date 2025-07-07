@@ -39,16 +39,16 @@ export default function AuctionRevenueCalculatorB() {
     }).format(value);
 
   return (
-    <div className="max-w-7xl mx-auto p-12 bg-white rounded-2xl shadow-md">
-      <div className="flex justify-between mb-8 items-center">
-<img src="/johnpye.png" alt="John Pye Logo" className="h-16" />
+    <div className="max-w-6xl mx-auto p-8 bg-white rounded-2xl shadow-md">
+      <div className="flex justify-between mb-4 items-center">
+        <img src="/johnpye.png" alt="John Pye Logo" className="h-16" />
         <h2 className="text-2xl font-semibold text-center">
           Acoustic Connect ROI: John Pye & Sons
         </h2>
-        <img src="/acoustic.png" alt="Acoustic Logo" className="h-14" />
+        <img src="/acoustic.png" alt="Acoustic Logo" className="h-12" />
       </div>
 
-      <div className="mb-6">
+      <div className="mt-2 mb-6">
         <label className="block text-base font-medium text-gray-700">
           Uplift From Personalisation (%): {upliftPercent}%
         </label>
@@ -58,7 +58,7 @@ export default function AuctionRevenueCalculatorB() {
           max={25}
           value={upliftPercent}
           onChange={(e) => setUpliftPercent(Number(e.target.value))}
-          className="w-full mt-2"
+          className="w-full"
         />
       </div>
 
@@ -72,23 +72,23 @@ export default function AuctionRevenueCalculatorB() {
         <div className="font-semibold">40,000</div>
 
         <div>Average Bids Per Lot</div>
-        <div className="font-semibold">{avgBidsPerLot}</div>
+        <div>{avgBidsPerLot}</div>
         <div className="text-green-600 font-semibold">{upliftedBidsPerLot}</div>
 
         <div>Average Lot Value</div>
-        <div className="font-semibold">{formatCurrency2dp(avgLotValue)}</div>
-        <div className="text-green-600 font-semibold">{formatCurrency2dp(parseFloat(upliftedLotValue))}</div>
+        <div>{formatCurrency2dp(avgLotValue)}</div>
+        <div className="text-green-600 font-semibold">{formatCurrency2dp(Number(upliftedLotValue))}</div>
 
         <div>Total Monthly Revenue</div>
-        <div className="font-semibold">{formatCurrency(monthlyRevenueBefore)}</div>
+        <div>{formatCurrency(monthlyRevenueBefore)}</div>
         <div className="text-green-600 font-semibold">{formatCurrency(monthlyRevenueAfter)}</div>
 
         <div>Total Annual Revenue</div>
-        <div className="font-semibold">{formatCurrency(annualRevenueBefore)}</div>
+        <div>{formatCurrency(annualRevenueBefore)}</div>
         <div className="text-green-600 font-semibold">{formatCurrency(annualRevenueAfter)}</div>
       </div>
 
-      <div className="grid grid-cols-2 gap-6 mt-16 text-center">
+      <div className="grid grid-cols-2 gap-6 mt-10 text-center">
         <div>
           <h3 className="text-base font-semibold text-gray-700">Monthly Revenue Uplift</h3>
           <p className="text-green-600 font-semibold text-lg">
