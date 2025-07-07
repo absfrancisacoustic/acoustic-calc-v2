@@ -6,7 +6,7 @@ export default function AuctionRevenueCalculatorB() {
   const [upliftPercent, setUpliftPercent] = useState(5);
 
   const weeklyLots = 40000;
-  const monthlyLots = weeklyLots * 4.3; // 172,000
+  const monthlyLots = weeklyLots * 4.3;
   const avgLotValue = 34.15;
   const avgBidsPerLot = 10.88;
 
@@ -15,7 +15,7 @@ export default function AuctionRevenueCalculatorB() {
   const upliftedLotValue = (avgLotValue * upliftMultiplier).toFixed(4);
 
   const monthlyRevenueBefore = monthlyLots * avgLotValue;
-  const monthlyRevenueAfter = monthlyLots * upliftedLotValue;
+  const monthlyRevenueAfter = monthlyLots * parseFloat(upliftedLotValue);
   const annualRevenueBefore = monthlyRevenueBefore * 12;
   const annualRevenueAfter = monthlyRevenueAfter * 12;
 
@@ -41,7 +41,7 @@ export default function AuctionRevenueCalculatorB() {
   return (
     <div className="max-w-7xl mx-auto p-12 bg-white rounded-2xl shadow-md">
       <div className="flex justify-between mb-8 items-center">
-        <img src="/johnpye.png" alt="John Pye Logo" className="h-14" />
+        <img src="/johnpye-logo.png" alt="John Pye Logo" className="h-14" />
         <h2 className="text-2xl font-semibold text-center">
           Acoustic Connect ROI: John Pye & Sons
         </h2>
@@ -91,11 +91,15 @@ export default function AuctionRevenueCalculatorB() {
       <div className="grid grid-cols-2 gap-6 mt-20 text-center">
         <div>
           <h3 className="text-base font-semibold text-gray-700">Monthly Revenue Uplift</h3>
-          <p className="text-green-600 font-semibold text-lg">{formatCurrency(upliftMonthly)}</p>
+          <p className="text-green-600 font-semibold text-lg">
+            {formatCurrency(upliftMonthly)}
+          </p>
         </div>
         <div>
           <h3 className="text-base font-semibold text-gray-700">Annual Revenue Uplift</h3>
-          <p className="text-green-600 font-semibold text-lg">{formatCurrency(upliftAnnual)}</p>
+          <p className="text-green-600 font-semibold text-lg">
+            {formatCurrency(upliftAnnual)}
+          </p>
         </div>
       </div>
     </div>
