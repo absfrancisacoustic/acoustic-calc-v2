@@ -62,44 +62,49 @@ export default function AuctionRevenueCalculatorB() {
         />
       </div>
 
-      <div className="grid grid-cols-3 gap-6 mt-8 text-base">
-        <div className="font-semibold text-gray-900 text-lg">Metric</div>
-        <div className="font-semibold text-gray-900 text-lg">Current</div>
-        <div className="font-semibold text-gray-900 text-lg">Estimated With Connect</div>
+      {/* Centered Grid Block */}
+      <div className="flex justify-center">
+        <div className="w-full max-w-3xl">
+          <div className="grid grid-cols-3 gap-6 mt-8 text-base">
+            <div className="font-semibold text-gray-900 text-lg">Metric</div>
+            <div className="font-semibold text-gray-900 text-lg">Current</div>
+            <div className="font-semibold text-gray-900 text-lg">Estimated With Connect</div>
 
-        <div>Total Weekly Lots</div>
-        <div className="font-semibold">40,000</div>
-        <div className="font-semibold">40,000</div>
+            <div>Total Weekly Lots</div>
+            <div className="font-semibold">40,000</div>
+            <div className="font-semibold">40,000</div>
 
-        <div>Average Bids Per Lot</div>
-        <div>{avgBidsPerLot}</div>
-        <div className="text-green-600 font-semibold">{upliftedBidsPerLot}</div>
+            <div>Average Bids Per Lot</div>
+            <div>{avgBidsPerLot}</div>
+            <div className="text-green-600 font-semibold">{upliftedBidsPerLot}</div>
 
-        <div>Average Lot Value</div>
-        <div>{formatCurrency2dp(avgLotValue)}</div>
-        <div className="text-green-600 font-semibold">{formatCurrency2dp(Number(upliftedLotValue))}</div>
+            <div>Average Lot Value</div>
+            <div>{formatCurrency2dp(avgLotValue)}</div>
+            <div className="text-green-600 font-semibold">{formatCurrency2dp(Number(upliftedLotValue))}</div>
 
-        <div>Total Monthly Revenue</div>
-        <div>{formatCurrency(monthlyRevenueBefore)}</div>
-        <div className="text-green-600 font-semibold">{formatCurrency(monthlyRevenueAfter)}</div>
+            <div>Total Monthly Revenue</div>
+            <div>{formatCurrency(monthlyRevenueBefore)}</div>
+            <div className="text-green-600 font-semibold">{formatCurrency(monthlyRevenueAfter)}</div>
 
-        <div>Total Annual Revenue</div>
-        <div>{formatCurrency(annualRevenueBefore)}</div>
-        <div className="text-green-600 font-semibold">{formatCurrency(annualRevenueAfter)}</div>
-      </div>
+            <div>Total Annual Revenue</div>
+            <div>{formatCurrency(annualRevenueBefore)}</div>
+            <div className="text-green-600 font-semibold">{formatCurrency(annualRevenueAfter)}</div>
+          </div>
 
-      <div className="grid grid-cols-2 gap-6 mt-10 text-center">
-        <div>
-          <h3 className="text-base font-semibold text-gray-700">Monthly Revenue Uplift</h3>
-          <p className="text-green-600 font-semibold text-lg">
-            {formatCurrency(upliftMonthly)}
-          </p>
-        </div>
-        <div>
-          <h3 className="text-base font-semibold text-gray-700">Annual Revenue Uplift</h3>
-          <p className="text-green-600 font-semibold text-lg">
-            {formatCurrency(upliftAnnual)}
-          </p>
+          <div className="grid grid-cols-2 gap-6 mt-10 text-center">
+            <div>
+              <h3 className="text-base font-semibold text-gray-700">Monthly Revenue Uplift</h3>
+              <p className="text-green-600 font-semibold text-lg">
+                {formatCurrency(upliftMonthly)}
+              </p>
+            </div>
+            <div>
+              <h3 className="text-base font-semibold text-gray-700">Annual Revenue Uplift</h3>
+              <p className="text-green-600 font-semibold text-lg">
+                {formatCurrency(upliftAnnual)}
+              </p>
+            </div>
+          </div>
         </div>
       </div>
     </div>
