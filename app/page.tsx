@@ -100,7 +100,7 @@ export default function AuctionRevenueCalculatorWithSources() {
       </div>
 
       <div className="mt-16">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Industry Uplift Benchmarks</h3>
+        <h3 className="text-lg font-semibold text-gray-900 mb-4">Industry Uplift Benchmarks When Utilising Personalisation and Retargeting</h3>
         <table className="min-w-full text-sm text-left border">
           <thead className="bg-gray-100">
             <tr>
@@ -110,23 +110,33 @@ export default function AuctionRevenueCalculatorWithSources() {
           </thead>
           <tbody>
             <tr>
-              <td className="px-4 py-2 border"><a href="https://instapage.com/blog/personalization-statistics" target="_blank" className="text-blue-600 underline">Instapage</a></td>
+              <td className="px-4 py-2 border">
+                <a href="https://instapage.com/blog/personalized-marketing-statistics" target="_blank" className="text-blue-600 underline">Instapage</a>
+              </td>
               <td className="px-4 py-2 border">20% conversion rate increase (2023)</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 border"><a href="https://blog.contactpigeon.com/personalization-statistics/" target="_blank" className="text-blue-600 underline">ContactPigeon</a></td>
-              <td className="px-4 py-2 border">10–20% increase in revenue (2024)</td>
+              <td className="px-4 py-2 border">
+                <a href="https://blog.contactpigeon.com/personalization-statistics/" target="_blank" className="text-blue-600 underline">ContactPigeon</a>
+              </td>
+              <td className="px-4 py-2 border">40× ROI (£20 return per £1 spent in ecommerce)</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 border"><a href="https://econsultancy.com/statistics/" target="_blank" className="text-blue-600 underline">Econsultancy</a></td>
-              <td className="px-4 py-2 border">93% of companies see revenue growth with personalization</td>
+              <td className="px-4 py-2 border">
+                <a href="https://segment.com/blog/personalization-statistics/" target="_blank" className="text-blue-600 underline">Twilio Segment</a>
+              </td>
+              <td className="px-4 py-2 border">89% of execs see personalisation as crucial; 80% consumer spending increase (2024)</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 border"><a href="https://www.mckinsey.com/business-functions/growth-marketing-and-sales/our-insights/the-value-of-getting-personalization-right-or-wrong-is-multiplying" target="_blank" className="text-blue-600 underline">McKinsey</a></td>
+              <td className="px-4 py-2 border">
+                <a href="https://www.mckinsey.com/business-functions/growth-marketing-and-sales/our-insights/the-value-of-getting-personalization-right-or-wrong-is-multiplying" target="_blank" className="text-blue-600 underline">McKinsey</a>
+              </td>
               <td className="px-4 py-2 border">10–15% increase in sales lift (2021)</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 border"><a href="https://go.forrester.com/blogs/category/personalization/" target="_blank" className="text-blue-600 underline">Forrester</a></td>
+              <td className="px-4 py-2 border">
+                <a href="https://www.forrester.com/blogs/personalization-lift-retail-results/" target="_blank" className="text-blue-600 underline">Forrester</a>
+              </td>
               <td className="px-4 py-2 border">Up to 33% lift in conversion (Retail, 2022)</td>
             </tr>
           </tbody>
