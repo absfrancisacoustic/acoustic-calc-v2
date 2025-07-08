@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 
-export default function AuctionRevenueCalculatorWithSources() {
+export default function AuctionRevenueCalculatorB() {
   const [upliftPercent, setUpLiftPercent] = useState(5);
 
   const weeklyLots = 40000;
@@ -100,44 +100,87 @@ export default function AuctionRevenueCalculatorWithSources() {
       </div>
 
       <div className="mt-16">
-        <h3 className="text-lg font-semibold text-gray-900 mb-4">Industry Uplift Benchmarks When Utilising Personalisation and Retargeting</h3>
-        <table className="min-w-full text-sm text-left border">
-          <thead className="bg-gray-100">
-            <tr>
-              <th className="px-4 py-2 border">Source</th>
-              <th className="px-4 py-2 border">Reported Uplift</th>
+        <h3 className="text-xl font-semibold text-gray-800 mb-4">
+          Industry Uplift Benchmarks When Utilising Personalisation and Retargeting
+        </h3>
+        <table className="table-auto w-full text-left border border-gray-300">
+          <thead>
+            <tr className="bg-gray-100">
+              <th className="border px-4 py-2">Source</th>
+              <th className="border px-4 py-2">Reported Uplift</th>
+              <th className="border px-4 py-2">Date</th>
             </tr>
           </thead>
           <tbody>
             <tr>
-              <td className="px-4 py-2 border">
-                <a href="https://instapage.com/blog/personalized-marketing-statistics" target="_blank" className="text-blue-600 underline">Instapage</a>
+              <td className="border px-4 py-2">
+                <a
+                  href="https://instapage.com/blog/personalization-statistics"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  Instapage
+                </a>
               </td>
-              <td className="px-4 py-2 border">20% conversion rate increase (2023)</td>
+              <td className="border px-4 py-2">20% increase in sales from site personalisation</td>
+              <td className="border px-4 py-2">April 2025</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 border">
-                <a href="https://blog.contactpigeon.com/personalization-statistics/" target="_blank" className="text-blue-600 underline">ContactPigeon</a>
+              <td className="border px-4 py-2">
+                <a
+                  href="https://www.bcg.com/publications/2024/what-consumers-want-from-personalization"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  Boston Consulting Group
+                </a>
               </td>
-              <td className="px-4 py-2 border">40× ROI (£20 return per £1 spent in ecommerce)</td>
+              <td className="border px-4 py-2">30–40% uplift in conversion from personalisation (Global retail study)</td>
+              <td className="border px-4 py-2">2024</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 border">
-                <a href="https://segment.com/blog/personalization-statistics/" target="_blank" className="text-blue-600 underline">Twilio Segment</a>
+              <td className="border px-4 py-2">
+                <a
+                  href="https://segment.com/state-of-personalization-report/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  Twilio Segment
+                </a>
               </td>
-              <td className="px-4 py-2 border">89% of execs see personalisation as crucial; 80% consumer spending increase (2024)</td>
+              <td className="border px-4 py-2">89% of execs see personalisation as crucial; 80% increase in consumer spending</td>
+              <td className="border px-4 py-2">2024</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 border">
-                <a href="https://www.mckinsey.com/business-functions/growth-marketing-and-sales/our-insights/the-value-of-getting-personalization-right-or-wrong-is-multiplying" target="_blank" className="text-blue-600 underline">McKinsey</a>
+              <td className="border px-4 py-2">
+                <a
+                  href="https://www.mckinsey.com/capabilities/growth-marketing-and-sales/our-insights/the-value-of-getting-personalization-right-or-wrong-is-multiplying"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  McKinsey
+                </a>
               </td>
-              <td className="px-4 py-2 border">10–15% increase in sales lift (2021)</td>
+              <td className="border px-4 py-2">10–15% increase in revenue from personalisation</td>
+              <td className="border px-4 py-2">November 2021</td>
             </tr>
             <tr>
-              <td className="px-4 py-2 border">
-                <a href="https://www.forrester.com/blogs/personalization-lift-retail-results/" target="_blank" className="text-blue-600 underline">Forrester</a>
+              <td className="border px-4 py-2">
+                <a
+                  href="https://vwo.com/blog/website-personalization-statistics/"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-blue-600 underline"
+                >
+                  VWO
+                </a>
               </td>
-              <td className="px-4 py-2 border">Up to 33% lift in conversion (Retail, 2022)</td>
+              <td className="border px-4 py-2">19% average sales uplift from onsite personalisation</td>
+              <td className="border px-4 py-2">April 2025</td>
             </tr>
           </tbody>
         </table>
